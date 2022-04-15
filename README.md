@@ -1,0 +1,1 @@
+# Simple chrome extension that saves small notes (consider this as a mundayne todo)
