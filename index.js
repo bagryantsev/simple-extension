@@ -6,7 +6,7 @@ const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
 
 if(localStorage.length) {
     myLeads = leadsFromLocalStorage;
-    renderLeads()
+    renderLeads(myLeads, leads)
 }
 
 btn.addEventListener("click", () => {
@@ -14,17 +14,17 @@ btn.addEventListener("click", () => {
         myLeads.push(searchField.value)
         searchField.value = "";
         localStorage.setItem("myLeads", JSON.stringify(myLeads));
-        renderLeads();
+        renderLeads(myLeads, leads);
     }
 });
 
 
-function renderLeads() {
-    const leadElements = myLeads.map(lead => renderLead(lead));
-    if (leads.hasChildNodes()) {
-        leads.replaceChildren(...leadElements)
+function renderLeads(leadsArr, leadsElement) {
+    const leadElements = leadsArr.map(lead => renderLead(lead));
+    if (leadsElement.hasChildNodes()) {
+        leadsElement.replaceChildren(...leadElements)
     } else {
-        leads.append(...leadElements);
+        leadsElement.append(...leadElements);
     }
 }
 
@@ -48,5 +48,5 @@ function deleteLead(e) {
     const value = e.target.previousSibling.textContent;
     myLeads = myLeads.filter(element => element !== value);
     localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    renderLeads();
+    renderLeads(myLeads, leads);
 }
